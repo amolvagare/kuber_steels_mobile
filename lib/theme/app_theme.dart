@@ -15,11 +15,11 @@ ThemeData getAppTheme() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundColor,
     primaryColor: AppColors.primaryColor,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primaryColor,
       secondary: AppColors.accentColor,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       bodyLarge: TextStyle(color: AppColors.textColor, fontSize: 16),
       bodyMedium: TextStyle(color: AppColors.subtleText),
       labelLarge: TextStyle(color: AppColors.primaryColor),
@@ -27,7 +27,7 @@ ThemeData getAppTheme() {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.fieldBg,
-      labelStyle: TextStyle(color: AppColors.subtleText),
+      labelStyle: const TextStyle(color: AppColors.subtleText),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide.none,
@@ -37,7 +37,7 @@ ThemeData getAppTheme() {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white, // Text color for button
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       ),
     ),

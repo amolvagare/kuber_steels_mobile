@@ -3,10 +3,12 @@ import '../theme/app_theme.dart';
 import '../components/header.dart';
 
 class ExportToExcelScreen extends StatelessWidget {
+  const ExportToExcelScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Export to Excel',
         showBackButton: true,
       ),
@@ -24,13 +26,13 @@ class ExportToExcelScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.description,
                     color: Colors.green,
                     size: 60,
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Microsoft Excel',
                     style: TextStyle(
                       fontSize: 24,
@@ -38,27 +40,27 @@ class ExportToExcelScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'Directly Export in your device',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white70,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: () {
                       // Placeholder action for EXPORT button
                     },
-                    icon: Icon(Icons.download, color: Colors.white),
-                    label: Text(
+                    icon: const Icon(Icons.download, color: Colors.white),
+                    label: const Text(
                       'EXPORT',
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

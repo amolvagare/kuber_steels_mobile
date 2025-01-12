@@ -7,10 +7,12 @@ import '../pages/account_info_screen.dart'; // Account Info Page
 import '../customer/customer_selection.dart'; // Customer Selection Page
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'KUBER STEEL INDUSTRIES',
         showBackButton: false,
       ),
@@ -31,13 +33,13 @@ class MainScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.business,
                         color: AppColors.primaryColor,
                         size: 40,
                       ),
-                      SizedBox(height: 16),
-                      Text(
+                      const SizedBox(height: 16),
+                      const Text(
                         'Welcome to Kuber Steel Industries',
                         style: TextStyle(
                           fontSize: 20,
@@ -46,7 +48,7 @@ class MainScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         'Your Trusted Partner in Steel Solutions',
                         style: TextStyle(
@@ -55,7 +57,7 @@ class MainScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -66,7 +68,7 @@ class MainScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => HomeScreen()),
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
                               );
                             },
                           ),
@@ -77,7 +79,7 @@ class MainScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ContactUsPage()),
+                                MaterialPageRoute(builder: (context) => const ContactUsPage()),
                               );
                             },
                           ),
@@ -88,7 +90,7 @@ class MainScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => CustomerSelectionScreen()),
+                                MaterialPageRoute(builder: (context) => const CustomerSelectionScreen()),
                               );
                             },
                           ),
@@ -99,7 +101,7 @@ class MainScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => AccountInfoScreen()),
+                                MaterialPageRoute(builder: (context) => const AccountInfoScreen()),
                               );
                             },
                           ),
@@ -128,10 +130,10 @@ class MainScreen extends StatelessWidget {
             onPressed: onPressed,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           label,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
       ],
     );

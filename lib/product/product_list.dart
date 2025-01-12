@@ -13,11 +13,13 @@ class ProductList extends StatelessWidget {
     {'name': 'Heavy Section', 'icon': 'assets/icons/heavy_section_icon.png'},
   ];
 
+  const ProductList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order for Mr. Gaurav'),
+        title: const Text('Order for Mr. Gaurav'),
         backgroundColor: AppColors.primaryColor,
       ),
       backgroundColor: AppColors.backgroundColor,
@@ -27,7 +29,7 @@ class ProductList extends StatelessWidget {
           children: [
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, // Three items per row
                   mainAxisSpacing: 20.0,
                   crossAxisSpacing: 20.0,
@@ -53,10 +55,10 @@ class ProductList extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           product['name']!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -76,12 +78,12 @@ class ProductList extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'BACK',
                     style: TextStyle(
                       color: Colors.white,
@@ -95,12 +97,12 @@ class ProductList extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'NEXT',
                     style: TextStyle(
                       color: Colors.white,

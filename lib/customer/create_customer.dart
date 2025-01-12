@@ -4,10 +4,12 @@ import '../components/header.dart'; // Import the custom Header
 import '../product/product_page.dart'; // Correct path for ProductPage
 
 class CreateCustomerScreen extends StatelessWidget {
+  const CreateCustomerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Create New Customer', // Set the title for the header
         showBackButton: false, // Display the hamburger menu instead of the back arrow
       ),
@@ -21,24 +23,24 @@ class CreateCustomerScreen extends StatelessWidget {
               child: ListView(
                 children: [
                   _buildTextField('Shop Name', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('First Name', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('Last Name', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('Billing Address', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('Shipping Address', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('Mobile No.', isRequired: true),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('Email ID'),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildTextField('GST No.'),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -48,12 +50,12 @@ class CreateCustomerScreen extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'BACK',
                     style: TextStyle(
                       fontSize: 16,
@@ -67,17 +69,17 @@ class CreateCustomerScreen extends StatelessWidget {
                     // Navigate to ProductPage
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProductPage()),
+                      MaterialPageRoute(builder: (context) => const ProductPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'NEXT',
                     style: TextStyle(
                       fontSize: 16,
@@ -98,16 +100,16 @@ class CreateCustomerScreen extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: isRequired ? 'Enter $label *' : 'Enter $label', // Add asterisk for required fields
-        hintStyle: TextStyle(color: Colors.black54), // Lighter color for hint
+        hintStyle: const TextStyle(color: Colors.black54), // Lighter color for hint
         filled: true,
         fillColor: AppColors.cardColor, // Background color for input field
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      style: TextStyle(color: Colors.black), // Black text for input
+      style: const TextStyle(color: Colors.black), // Black text for input
     );
   }
 }

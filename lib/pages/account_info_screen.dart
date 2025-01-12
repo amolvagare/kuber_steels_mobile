@@ -3,10 +3,12 @@ import '../theme/app_theme.dart';
 import '../components/header.dart';
 
 class AccountInfoScreen extends StatelessWidget {
+  const AccountInfoScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Account Info',
         showBackButton: true,
       ),
@@ -17,9 +19,9 @@ class AccountInfoScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(12),
@@ -31,22 +33,22 @@ class AccountInfoScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
-                        icon: Icon(Icons.close, color: Colors.white),
+                        icon: const Icon(Icons.close, color: Colors.white),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 40,
                       backgroundColor: AppColors.secondaryColor,
                       child: Icon(Icons.person, size: 40, color: Colors.white),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     _buildInfoField(Icons.person, 'Username', context),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     _buildInfoField(Icons.email, 'Email ID', context),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     _buildInfoField(Icons.phone, 'Mobile No.', context),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         // Action for logout
@@ -54,19 +56,19 @@ class AccountInfoScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: AppColors.primaryColor,
-                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text('Log out', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text('Log out', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
                         // Action for privacy policy
                       },
-                      child: Text(
+                      child: const Text(
                         'Privacy Policy',
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
@@ -85,10 +87,10 @@ class AccountInfoScreen extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: Colors.white70),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
           label,
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ],
     );

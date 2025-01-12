@@ -3,10 +3,12 @@ import '../theme/app_theme.dart';
 import '../components/header.dart';
 
 class OrderHeavySectionScreen extends StatelessWidget {
+  const OrderHeavySectionScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'KUBER STEEL INDUSTRIES',
         showBackButton: true,
       ),
@@ -16,13 +18,13 @@ class OrderHeavySectionScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildDropdownField('Item Name*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Qty*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Price*'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildActionButtons(context),
           ],
         ),
@@ -34,23 +36,23 @@ class OrderHeavySectionScreen extends StatelessWidget {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      items: [
+      items: const [
         DropdownMenuItem(value: 'Option 1', child: Text('Option 1')),
         DropdownMenuItem(value: 'Option 2', child: Text('Option 2')),
       ],
       onChanged: (value) {
         // Handle dropdown selection change
       },
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
     );
   }
 
@@ -58,16 +60,16 @@ class OrderHeavySectionScreen extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       keyboardType: TextInputType.number,
     );
   }
@@ -82,12 +84,12 @@ class OrderHeavySectionScreen extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(
+          child: const Text(
             'ADD',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
@@ -98,12 +100,12 @@ class OrderHeavySectionScreen extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(
+          child: const Text(
             'PREVIEW',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
@@ -114,12 +116,12 @@ class OrderHeavySectionScreen extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(
+          child: const Text(
             'CANCEL',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),

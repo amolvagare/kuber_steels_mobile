@@ -5,10 +5,12 @@ import '../product/product_page.dart';
 import '../product/previous_order.dart';
 
 class CustomerDetailsScreen extends StatelessWidget {
+  const CustomerDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Customer Details',
         showBackButton: true,
       ),
@@ -26,7 +28,7 @@ class CustomerDetailsScreen extends StatelessWidget {
             _buildDetail("Mobile No.*", "+91 98765 43210"),
             _buildDetail("Email ID*", "john.doe@example.com"),
             _buildDetail("GST NO.*", "27AAEPM1234Q1Z5"),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,19 +37,19 @@ class CustomerDetailsScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PreviousOrderPage(),
+                        builder: (context) => const PreviousOrderPage(),
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor, // Dark button for contrast
                     foregroundColor: Colors.white, // White text color
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'PREV. ORDER',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -57,19 +59,19 @@ class CustomerDetailsScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductPage(),
+                        builder: (context) => const ProductPage(),
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor, // Dark button for contrast
                     foregroundColor: Colors.white, // White text color
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'NEW ORDER',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -87,7 +89,7 @@ class CustomerDetailsScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white, // White background for detail box
           borderRadius: BorderRadius.circular(8),
@@ -98,7 +100,7 @@ class CustomerDetailsScreen extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black, // Black text for label
                 fontWeight: FontWeight.w600,
@@ -108,7 +110,7 @@ class CustomerDetailsScreen extends StatelessWidget {
               child: Text(
                 value,
                 textAlign: TextAlign.end,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black, // Black text for value
                 ),

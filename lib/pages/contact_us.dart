@@ -3,10 +3,12 @@ import '../theme/app_theme.dart';
 import '../components/header.dart';
 
 class ContactUsPage extends StatelessWidget {
+  const ContactUsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Contact Us',
         showBackButton: true,
       ),
@@ -15,7 +17,7 @@ class ContactUsPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               color: AppColors.primaryColor, // Dark card color for contrast
               borderRadius: BorderRadius.circular(16),
@@ -23,7 +25,7 @@ class ContactUsPage extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
@@ -31,7 +33,7 @@ class ContactUsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   'Get in Touch',
                   style: TextStyle(
                     fontSize: 22,
@@ -39,19 +41,19 @@ class ContactUsPage extends StatelessWidget {
                     color: Colors.white, // White text for high contrast
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _buildContactInfo(
                   icon: Icons.location_on,
                   title: 'Visit Us',
                   details: '123 Steel Industrial Area\nMumbai, Maharashtra 400001',
                 ),
-                Divider(color: Colors.white24), // Light divider color for contrast
+                const Divider(color: Colors.white24), // Light divider color for contrast
                 _buildContactInfo(
                   icon: Icons.phone,
                   title: 'Call Us',
                   details: '+91 98765 43210\n+91 98765 43211',
                 ),
-                Divider(color: Colors.white24),
+                const Divider(color: Colors.white24),
                 _buildContactInfo(
                   icon: Icons.email,
                   title: 'Email Us',
@@ -73,30 +75,30 @@ class ContactUsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.white, // Light background for icon for contrast
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, color: AppColors.primaryColor), // Dark icon color
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.white, // White color for titles
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   details,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.white70, // Slightly lighter white for details
                   ),

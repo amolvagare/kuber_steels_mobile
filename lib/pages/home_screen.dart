@@ -6,10 +6,12 @@ import 'contact_us.dart';
 import '../product/product_page.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'KUBER STEEL INDUSTRIES',
         showBackButton: false,
       ),
@@ -30,13 +32,13 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.business,
                         color: AppColors.primaryColor,
                         size: 40,
                       ),
-                      SizedBox(height: 16),
-                      Text(
+                      const SizedBox(height: 16),
+                      const Text(
                         'Welcome to Kuber Steel Industries',
                         style: TextStyle(
                           fontSize: 20,
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         'Your Trusted Partner in Steel Solutions',
                         style: TextStyle(
@@ -54,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -66,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProductPage(),
+                                  builder: (context) => const ProductPage(),
                                 ),
                               );
                             },
@@ -79,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ContactUsPage(), // Navigate to Contact Us page
+                                  builder: (context) => const ContactUsPage(), // Navigate to Contact Us page
                                 ),
                               );
                             },
@@ -92,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CustomerSelectionScreen(),
+                                  builder: (context) => const CustomerSelectionScreen(),
                                 ),
                               );
                             },
@@ -123,10 +125,10 @@ class HomeScreen extends StatelessWidget {
             onPressed: onPressed,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           label,
-          style: TextStyle(color: Colors.black), // Original text color for consistency
+          style: const TextStyle(color: Colors.black), // Original text color for consistency
         ),
       ],
     );

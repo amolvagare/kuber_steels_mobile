@@ -3,10 +3,12 @@ import '../theme/app_theme.dart';
 import '../components/header.dart';
 
 class OrderAngleScreen extends StatelessWidget {
+  const OrderAngleScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'KUBER STEEL INDUSTRIES',
         showBackButton: true,
       ),
@@ -16,7 +18,7 @@ class OrderAngleScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Order for Mr. Gaurav,',
               style: TextStyle(
                 fontSize: 18,
@@ -24,8 +26,8 @@ class OrderAngleScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'ORDER FOR ANGLE',
               style: TextStyle(
                 fontSize: 18,
@@ -33,13 +35,13 @@ class OrderAngleScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildDropdownField('Item Name*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Qty*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Price*'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildActionButtons(context),
           ],
         ),
@@ -51,7 +53,7 @@ class OrderAngleScreen extends StatelessWidget {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
@@ -65,7 +67,7 @@ class OrderAngleScreen extends StatelessWidget {
       ))
           .toList(),
       onChanged: (value) {},
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
     );
   }
 
@@ -73,14 +75,14 @@ class OrderAngleScreen extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
     );
   }
 
@@ -106,14 +108,14 @@ class OrderAngleScreen extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

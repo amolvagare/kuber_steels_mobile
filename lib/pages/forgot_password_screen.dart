@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,12 +11,12 @@ class ForgotPasswordScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor, // Theme color for AppBar
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white), // Contrast color for the icon
+          icon: const Icon(Icons.arrow_back, color: Colors.white), // Contrast color for the icon
           onPressed: () {
             Navigator.pop(context); // Navigate back to the login screen
           },
         ),
-        title: Text(
+        title: const Text(
           'Forgot Password',
           style: TextStyle(color: Colors.white), // Light color for text on dark AppBar
         ),
@@ -27,9 +29,9 @@ class ForgotPasswordScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          child: const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

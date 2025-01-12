@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class OrderGCScreen extends StatelessWidget {
+  const OrderGCScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: Text(
+        title: const Text(
           'KUBER STEEL INDUSTRIES',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu, color: Colors.white),
           onPressed: () {
             // Open drawer or other actions
           },
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart, color: Colors.white),
+            icon: const Icon(Icons.shopping_cart, color: Colors.white),
             onPressed: () {
               // Navigate to cart page or other actions
             },
@@ -32,7 +34,7 @@ class OrderGCScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Order for Mr. Gaurav,',
               style: TextStyle(
                 fontSize: 18,
@@ -40,8 +42,8 @@ class OrderGCScreen extends StatelessWidget {
                 color: Colors.black, // Darker text color
               ),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'ORDER FOR GC',
               style: TextStyle(
                 fontSize: 18,
@@ -49,17 +51,17 @@ class OrderGCScreen extends StatelessWidget {
                 color: Colors.black, // Darker text color
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildDropdownField('Brand*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildDropdownField('Thickness*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Length*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Qty*'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInputField('Price*'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildActionButtons(context),
           ],
         ),
@@ -71,7 +73,7 @@ class OrderGCScreen extends StatelessWidget {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w600), // Darker text
+        labelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600), // Darker text
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
@@ -85,7 +87,7 @@ class OrderGCScreen extends StatelessWidget {
       ))
           .toList(),
       onChanged: (value) {},
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
     );
   }
 
@@ -93,14 +95,14 @@ class OrderGCScreen extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w600), // Darker text
+        labelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600), // Darker text
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
     );
   }
 
@@ -130,14 +132,14 @@ class OrderGCScreen extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

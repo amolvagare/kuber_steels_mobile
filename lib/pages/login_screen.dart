@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../components/button.dart';
 import '../components/input_field.dart';
-import '../theme/app_theme.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Welcome Text
-                      Text(
+                      const Text(
                         'Welcome to Kuber Steel Industries',
                         style: TextStyle(
                           color: Colors.black, // Dark color for visibility on light background
@@ -32,22 +33,22 @@ class LoginScreen extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
 
                       // Username Input Field
-                      CustomInputField(
+                      const CustomInputField(
                         label: 'Username',
                         icon: Icons.person,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Password Input Field
-                      CustomInputField(
+                      const CustomInputField(
                         label: 'Password',
                         icon: Icons.lock,
                         isPassword: true,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Forgot Password Link
                       Align(
@@ -56,13 +57,13 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot-password');
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot password?',
                             style: TextStyle(color: Colors.blueAccent), // Accent color for visibility
                           ),
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
                       // Login Button
                       CustomButton(
@@ -90,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'info@polynovators.com',
                     style: TextStyle(

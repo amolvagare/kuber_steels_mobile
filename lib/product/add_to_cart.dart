@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
-import '../components/header.dart';
 import '../whatsapp/whatsapp_integration.dart'; // Import WhatsAppIntegrationScreen
 
 class AddToCartScreen extends StatelessWidget {
@@ -12,17 +11,19 @@ class AddToCartScreen extends StatelessWidget {
     // Add more items as needed
   ];
 
+  const AddToCartScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        title: Text(
+        title: const Text(
           'KUBER STEEL INDUSTRIES - Cart',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu, color: Colors.white),
           onPressed: () {
             // Open drawer or other actions
           },
@@ -34,7 +35,7 @@ class AddToCartScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Cart Items',
               style: TextStyle(
                 fontSize: 18,
@@ -42,7 +43,7 @@ class AddToCartScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
                 itemCount: cartItems.length,
@@ -50,7 +51,7 @@ class AddToCartScreen extends StatelessWidget {
                   final item = cartItems[index];
                   return Card(
                     color: AppColors.cardColor,
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: const EdgeInsets.only(bottom: 10),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -64,23 +65,23 @@ class AddToCartScreen extends StatelessWidget {
                             children: [
                               Text(
                                 item['name'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 'Price: ₹${item['price']}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black54,
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 'Quantity: ${item['quantity']}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -89,19 +90,19 @@ class AddToCartScreen extends StatelessWidget {
                           Row(
                             children: [
                               IconButton(
-                                icon: Icon(Icons.remove, color: Colors.red),
+                                icon: const Icon(Icons.remove, color: Colors.red),
                                 onPressed: () {
                                   // Decrease quantity action
                                 },
                               ),
                               IconButton(
-                                icon: Icon(Icons.add, color: Colors.green),
+                                icon: const Icon(Icons.add, color: Colors.green),
                                 onPressed: () {
                                   // Increase quantity action
                                 },
                               ),
                               IconButton(
-                                icon: Icon(Icons.delete, color: Colors.red),
+                                icon: const Icon(Icons.delete, color: Colors.red),
                                 onPressed: () {
                                   // Remove item from cart action
                                 },
@@ -115,9 +116,9 @@ class AddToCartScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildTotalSection(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildCheckoutButton(context),
           ],
         ),
@@ -131,7 +132,7 @@ class AddToCartScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        const Text(
           'Total',
           style: TextStyle(
             fontSize: 18,
@@ -141,7 +142,7 @@ class AddToCartScreen extends StatelessWidget {
         ),
         Text(
           '₹$total',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -159,17 +160,17 @@ class AddToCartScreen extends StatelessWidget {
           // Navigate to WhatsAppIntegrationScreen on checkout
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => WhatsAppIntegrationScreen()),
+            MaterialPageRoute(builder: (context) => const WhatsAppIntegrationScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        child: Text(
+        child: const Text(
           'CHECKOUT',
           style: TextStyle(
             color: Colors.white,

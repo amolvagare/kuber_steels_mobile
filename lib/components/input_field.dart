@@ -6,7 +6,7 @@ class CustomInputField extends StatelessWidget {
   final IconData icon;
   final bool isPassword;
 
-  const CustomInputField({
+  const CustomInputField({super.key, 
     required this.label,
     required this.icon,
     this.isPassword = false,
@@ -19,7 +19,7 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: AppColors.subtleText),
         hintText: label, // Use hintText instead of labelText
-        hintStyle: TextStyle(color: AppColors.subtleText),
+        hintStyle: const TextStyle(color: AppColors.subtleText),
         filled: true,
         fillColor: AppColors.fieldBg,
         border: OutlineInputBorder(
@@ -27,7 +27,7 @@ class CustomInputField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
       ),
-      style: TextStyle(color: AppColors.textColor),
+      style: const TextStyle(color: AppColors.textColor),
     );
   }
 }

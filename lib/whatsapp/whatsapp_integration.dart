@@ -4,10 +4,12 @@ import '../components/header.dart';
 import '../pages/login_screen.dart'; // Import the authentication screen
 
 class WhatsAppIntegrationScreen extends StatelessWidget {
+  const WhatsAppIntegrationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'Order Confirmation',
         showBackButton: true,
       ),
@@ -30,11 +32,11 @@ class WhatsAppIntegrationScreen extends StatelessWidget {
                     height: 60,
                     width: 60,
                     errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.error, color: Colors.red, size: 60);
+                      return const Icon(Icons.error, color: Colors.red, size: 60);
                     },
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'WhatsApp',
                     style: TextStyle(
                       fontSize: 24,
@@ -42,43 +44,43 @@ class WhatsAppIntegrationScreen extends StatelessWidget {
                       color: Colors.black, // Dark text for visibility
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'Order Confirmed!',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black87, // Slightly lighter for distinction
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: () {
                       // Placeholder for future WhatsApp integration
                     },
-                    icon: Icon(Icons.share, color: Colors.white),
-                    label: Text(
+                    icon: const Icon(Icons.share, color: Colors.white),
+                    label: const Text(
                       'Share Via WhatsApp',
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
                             (Route<dynamic> route) => false,
                       );
                     },
-                    icon: Icon(Icons.exit_to_app, color: Colors.white), // Exit icon
-                    label: Text(
+                    icon: const Icon(Icons.exit_to_app, color: Colors.white), // Exit icon
+                    label: const Text(
                       'EXIT',
                       style: TextStyle(
                         color: Colors.white,
@@ -87,7 +89,7 @@ class WhatsAppIntegrationScreen extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor, // Use primary color
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

@@ -5,10 +5,12 @@ import 'customer_details.dart';
 import 'create_customer.dart';
 
 class CustomerSelectionScreen extends StatelessWidget {
+  const CustomerSelectionScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
+      appBar: const Header(
         title: 'KUBER STEEL INDUSTRIES',
         showBackButton: false,
       ),
@@ -18,7 +20,7 @@ class CustomerSelectionScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'SEARCH BAR',
               style: TextStyle(
                 fontSize: 16,
@@ -26,7 +28,7 @@ class CustomerSelectionScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white, // Light background for the search bar
@@ -35,11 +37,11 @@ class CustomerSelectionScreen extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   hintText: 'Search by Name, Mobile, or Shop Name...',
@@ -50,7 +52,7 @@ class CustomerSelectionScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,17 +61,17 @@ class CustomerSelectionScreen extends StatelessWidget {
                     // Navigate to Create Customer screen
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CreateCustomerScreen()),
+                      MaterialPageRoute(builder: (context) => const CreateCustomerScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'New +',
                     style: TextStyle(
                       fontSize: 16,
@@ -83,17 +85,17 @@ class CustomerSelectionScreen extends StatelessWidget {
                     // Navigate to Customer Details screen
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CustomerDetailsScreen()),
+                      MaterialPageRoute(builder: (context) => const CustomerDetailsScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'NEXT',
                     style: TextStyle(
                       fontSize: 16,
