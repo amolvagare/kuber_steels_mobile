@@ -50,7 +50,7 @@ class ProductPage extends StatelessWidget {
     },
   ];
 
-  const ProductPage({super.key});
+  ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {

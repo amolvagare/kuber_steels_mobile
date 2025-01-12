@@ -34,7 +34,7 @@ class SupportScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ProductList(),
+                    builder: (context) => ProductList(),
                   ),
                 );
               },

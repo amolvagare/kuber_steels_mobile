@@ -133,7 +133,7 @@ class PreviousOrderPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ProductPage()),
+                      MaterialPageRoute(builder: (context) => ProductPage()),
                     ); // Navigate to place a new order
                   },
                   style: ElevatedButton.styleFrom(

@@ -13,7 +13,7 @@ class ProductList extends StatelessWidget {
     {'name': 'Heavy Section', 'icon': 'assets/icons/heavy_section_icon.png'},
   ];
 
-  const ProductList({super.key});
+  ProductList({super.key});
 
   @override
   Widget build(BuildContext context) {

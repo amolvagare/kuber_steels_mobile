@@ -120,7 +120,7 @@ class OrderCCScreen extends StatelessWidget {
           // Navigate to AddToCartScreen when "Preview" is clicked
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddToCartScreen()),
+            MaterialPageRoute(builder: (context) => AddToCartScreen()),
           );
         }),
         _buildActionButton(context, 'PRODUCT LIST', Colors.orange, () {

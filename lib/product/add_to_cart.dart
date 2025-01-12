@@ -11,7 +11,7 @@ class AddToCartScreen extends StatelessWidget {
     // Add more items as needed
   ];
 
-  const AddToCartScreen({super.key});
+  AddToCartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
