@@ -65,14 +65,6 @@ class ProductPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Order for Mr. Gaurav,',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
             const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(

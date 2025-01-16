@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kuber_steels/pages/dialog_utils.dart';
+import 'package:kuber_steels/services/authentication.dart';
+import 'package:kuber_steels/widgets/snackbar.dart';
 import '../theme/app_theme.dart';
 import '../components/header.dart';
 
@@ -52,6 +55,10 @@ class AccountInfoScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // Action for logout
+                        AuthenticationService().logOut();
+                        // showSnackBar(context, "User logged off successfully");
+                        Navigator.pushReplacementNamed(context, '/login');
+                        DialogUtils.showErrorDialog("user logged of successfully");
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,

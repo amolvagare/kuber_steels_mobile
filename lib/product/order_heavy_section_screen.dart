@@ -36,7 +36,7 @@ class OrderHeavySectionScreen extends StatelessWidget {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.black),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
@@ -60,7 +60,7 @@ class OrderHeavySectionScreen extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.black),
         filled: true,
         fillColor: AppColors.cardColor,
         border: OutlineInputBorder(
