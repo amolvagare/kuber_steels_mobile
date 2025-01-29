@@ -1,19 +1,25 @@
 class User {
+  final int id;
   final String username;
   final String email;
-  final String mobileNo;
+  final String firstName;
+  final String lastName;
 
   User({
+    required this.id,
     required this.username,
     required this.email,
-    required this.mobileNo,
+    required this.firstName,
+    required this.lastName,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+      id: json['id'] ?? 0,
       username: json['username'] ?? '',
       email: json['email'] ?? '',
-      mobileNo: json['mobile_no'] ?? '',
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
     );
   }
 
@@ -21,7 +27,11 @@ class User {
     return {
       'username': username,
       'email': email,
-      'mobile_no': mobileNo,
     };
+  }
+
+  String get fullName {
+    if (firstName.isEmpty && lastName.isEmpty) return username;
+    return '$firstName $lastName'.trim();
   }
 } 

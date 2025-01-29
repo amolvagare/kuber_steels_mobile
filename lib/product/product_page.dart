@@ -10,10 +10,7 @@ import 'order_channel_screen.dart';
 import 'order_angle_screen.dart';
 import 'order_heavy_section_screen.dart';
 import 'order_frs_screen.dart';
-import 'add_to_cart_screen.dart';
 import 'package:provider/provider.dart';
-import '../providers/cart_provider.dart';
-import '../cart/cart_screen.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -210,22 +207,6 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ],
       ),
-      floatingActionButton: Consumer<CartProvider>(
-        builder: (context, cart, child) {
-          if (cart.itemCount == 0) return const SizedBox.shrink();
-          return FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CartScreen()),
-              );
-            },
-            backgroundColor: AppColors.primaryColor,
-            label: Text('Cart (${cart.itemCount})'),
-            icon: const Icon(Icons.shopping_cart),
-          );
-        },
-      ),
     );
   }
 
@@ -234,14 +215,7 @@ class _ProductPageState extends State<ProductPage> {
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddToCartScreen(product: product),
-            ),
-          );
-        },
+        onTap: () => _navigateToProductScreen(context, product),
         borderRadius: BorderRadius.circular(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,10 +304,10 @@ class _ProductPageState extends State<ProductPage> {
     Widget screen;
     switch (product.category.toUpperCase()) {
       case 'CC':
-        screen = const OrderCCScreen();
+        screen = OrderCCScreen(product: product);
         break;
       case 'GC':
-        screen = const OrderGCScreen();
+        screen = OrderGCScreen(product: product);
         break;
       case 'PIPES':
         screen = const OrderPipeScreen();

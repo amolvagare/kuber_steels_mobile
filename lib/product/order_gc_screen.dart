@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../models/product.dart';
+import '../services/api_service.dart';
 
-class OrderGCScreen extends StatelessWidget {
-  const OrderGCScreen({super.key});
+class OrderGCScreen extends StatefulWidget {
+  final Product product;
+
+  const OrderGCScreen({super.key, required this.product});
+
+  @override
+  State<OrderGCScreen> createState() => _OrderGCScreenState();
+}
+
+class _OrderGCScreenState extends State<OrderGCScreen> {
+  ProductVariant? selectedVariant;
+  late Future<Product> _productDetailsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _productDetailsFuture = ApiService().getProductDetails(widget.product.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,42 +47,75 @@ class OrderGCScreen extends StatelessWidget {
         ],
       ),
       backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Order for Mr. Gaurav,',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black, // Darker text color
-              ),
+      body: FutureBuilder<Product>(
+        future: _productDetailsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          final product = snapshot.data!;
+          final variants = product.variants ?? [];
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Product: ${product.name}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 16),
+                
+                // Color dropdown
+                DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(labelText: 'Color'),
+                  items: variants
+                      .map((v) => DropdownMenuItem(
+                            value: v.color.colorName,
+                            child: Text(v.color.colorName),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    // Handle color selection
+                  },
+                ),
+
+                // Size dropdown
+                DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(labelText: 'Size'),
+                  items: variants
+                      .map((v) => DropdownMenuItem(
+                            value: v.size.sizeValue,
+                            child: Text(v.size.sizeValue),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    // Handle size selection
+                  },
+                ),
+
+                // Thickness dropdown
+                DropdownButtonFormField<double>(
+                  decoration: const InputDecoration(labelText: 'Thickness'),
+                  items: variants
+                      .map((v) => DropdownMenuItem(
+                            value: v.thickness.thicknessValue,
+                            child: Text('${v.thickness.thicknessValue}'),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    // Handle thickness selection
+                  },
+                ),
+
+                // ... rest of your form fields
+              ],
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'ORDER FOR GC',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black, // Darker text color
-              ),
-            ),
-            const SizedBox(height: 20),
-            _buildDropdownField('Brand*'),
-            const SizedBox(height: 10),
-            _buildDropdownField('Thickness*'),
-            const SizedBox(height: 10),
-            _buildInputField('Length*'),
-            const SizedBox(height: 10),
-            _buildInputField('Qty*'),
-            const SizedBox(height: 10),
-            _buildInputField('Price*'),
-            const SizedBox(height: 20),
-            _buildActionButtons(context),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -2,93 +2,129 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../components/header.dart'; // Import the custom Header
 import '../product/product_page.dart'; // Correct path for ProductPage
+import '../services/api_service.dart';
 
-class CreateCustomerScreen extends StatelessWidget {
+class CreateCustomerScreen extends StatefulWidget {
   const CreateCustomerScreen({super.key});
+
+  @override
+  State<CreateCustomerScreen> createState() => _CreateCustomerScreenState();
+}
+
+class _CreateCustomerScreenState extends State<CreateCustomerScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _pincodeController = TextEditingController();
+  final _gstController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
+    _cityController.dispose();
+    _pincodeController.dispose();
+    _gstController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _createCustomer() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      await ApiService().createCustomer(
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        address: _addressController.text,
+        city: _cityController.text,
+        pincode: _pincodeController.text,
+        gstNo: _gstController.text,
+      );
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Customer created successfully')),
+        );
+        Navigator.pop(context); // Return to customer list
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(
-        title: 'Create New Customer', // Set the title for the header
-        showBackButton: false, // Display the hamburger menu instead of the back arrow
+        title: 'Create New Customer',
+        showBackButton: true,
       ),
-      backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: const EdgeInsets.all(16),
           children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildTextField('Shop Name', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('First Name', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('Last Name', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('Billing Address', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('Shipping Address', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('Mobile No.', isRequired: true),
-                  const SizedBox(height: 10),
-                  _buildTextField('Email ID'),
-                  const SizedBox(height: 10),
-                  _buildTextField('GST No.'),
-                ],
-              ),
+            _buildTextField(
+              controller: _nameController,
+              label: 'Name',
+              validator: (v) => v?.isEmpty ?? true ? 'Name is required' : null,
+            ),
+            _buildTextField(
+              controller: _emailController,
+              label: 'Email',
+              validator: (v) => v?.isEmpty ?? true ? 'Email is required' : null,
+            ),
+            _buildTextField(
+              controller: _phoneController,
+              label: 'Phone',
+              validator: (v) => v?.isEmpty ?? true ? 'Phone is required' : null,
+            ),
+            _buildTextField(
+              controller: _addressController,
+              label: 'Address',
+              validator: (v) => v?.isEmpty ?? true ? 'Address is required' : null,
+            ),
+            _buildTextField(
+              controller: _cityController,
+              label: 'City',
+              validator: (v) => v?.isEmpty ?? true ? 'City is required' : null,
+            ),
+            _buildTextField(
+              controller: _pincodeController,
+              label: 'Pincode',
+              validator: (v) => v?.isEmpty ?? true ? 'Pincode is required' : null,
+            ),
+            _buildTextField(
+              controller: _gstController,
+              label: 'GST No',
+              validator: (v) => v?.isEmpty ?? true ? 'GST No is required' : null,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Navigate back to the previous screen
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'BACK',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to ProductPage
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProductPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'NEXT',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+            ElevatedButton(
+              onPressed: _isLoading ? null : _createCustomer,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+              child: _isLoading
+                  ? const CircularProgressIndicator()
+                  : const Text('Create Customer'),
             ),
           ],
         ),
@@ -96,20 +132,21 @@ class CreateCustomerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String label, {bool isRequired = false}) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: isRequired ? 'Enter $label *' : 'Enter $label', // Add asterisk for required fields
-        hintStyle: const TextStyle(color: Colors.black54), // Lighter color for hint
-        filled: true,
-        fillColor: AppColors.cardColor, // Background color for input field
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String? Function(String?) validator,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        validator: validator,
       ),
-      style: const TextStyle(color: Colors.black), // Black text for input
     );
   }
 }

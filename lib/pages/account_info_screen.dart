@@ -39,12 +39,12 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
             builder: (context, snapshot) {
               String username = 'No data';
               String email = 'No data';
-              String mobile = 'No data';
+              String name = 'No data';
 
               if (snapshot.hasData) {
                 username = snapshot.data!.username;
                 email = snapshot.data!.email;
-                mobile = snapshot.data!.mobileNo;
+                name = snapshot.data!.fullName;
               }
 
               return Column(
@@ -69,11 +69,11 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       padding: EdgeInsets.all(8.0),
                       child: CircularProgressIndicator(color: Colors.white),
                     ),
-                  _buildInfoField(Icons.person, username, context),
+                  _buildInfoField(Icons.person, name, context),
+                  const SizedBox(height: 12),
+                  _buildInfoField(Icons.account_circle, username, context),
                   const SizedBox(height: 12),
                   _buildInfoField(Icons.email, email, context),
-                  const SizedBox(height: 12),
-                  _buildInfoField(Icons.phone, mobile, context),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {

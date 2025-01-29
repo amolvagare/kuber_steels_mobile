@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'add_to_cart.dart';  // Import the AddToCartScreen
+import '../services/api_service.dart';
+import '../models/product.dart';
 
-class OrderCCScreen extends StatelessWidget {
-  const OrderCCScreen({super.key});
+class OrderCCScreen extends StatefulWidget {
+  final Product product;
+
+  const OrderCCScreen({super.key, required this.product});
+
+  @override
+  State<OrderCCScreen> createState() => _OrderCCScreenState();
+}
+
+class _OrderCCScreenState extends State<OrderCCScreen> {
+  ProductVariant? selectedVariant;
+  late Future<Product> _productDetailsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _productDetailsFuture = ApiService().getProductDetails(widget.product.id);
+  }
 
   @override
   Widget build(BuildContext context) {

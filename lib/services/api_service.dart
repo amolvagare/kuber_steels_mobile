@@ -13,12 +13,14 @@ class ApiService {
       throw Exception('No token available');
     }
 
-    const String apiUrl =
-        'http://localhost:8000/api/user'; // Adjust URL as needed
+    const String apiUrl = 'https://api.polynovators.in/api/v1/me';
     try {
       final response = await http.get(
         Uri.parse(apiUrl),
-        headers: {'Authorization': 'Bearer $token'},
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
       );
 
       if (response.statusCode == 200) {
@@ -39,7 +41,7 @@ class ApiService {
       throw Exception('No token available');
     }
 
-    const String apiUrl = 'http://127.0.0.1:8000/api/v1/products';
+    const String apiUrl = 'https://api.polynovators.in/api/v1/products';
     try {
       final response = await http.get(
         Uri.parse(apiUrl),
@@ -70,8 +72,8 @@ class ApiService {
     }
 
     final String apiUrl = searchQuery != null 
-        ? 'http://127.0.0.1:8000/api/v1/customers?search=$searchQuery'
-        : 'http://127.0.0.1:8000/api/v1/customers';
+        ? 'https://api.polynovators.in/api/v1/customers?search=$searchQuery'
+        : 'https://api.polynovators.in/api/v1/customers';
 
     try {
       final response = await http.get(
@@ -91,6 +93,77 @@ class ApiService {
         throw Exception(errorData['detail'] ?? 'Authentication failed');
       } else {
         throw Exception('Failed to fetch customers: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('An error occurred: $e');
+    }
+  }
+
+  Future<Product> getProductDetails(int productId) async {
+    final token = await StorageService.getToken();
+    if (token == null) {
+      throw Exception('No token available');
+    }
+
+    final String apiUrl = 'https://api.polynovators.in/api/v1/products/$productId';
+    try {
+      final response = await http.get(
+        Uri.parse(apiUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        return Product.fromJson(responseData);
+      } else {
+        throw Exception('Failed to fetch product details: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('An error occurred: $e');
+    }
+  }
+
+  Future<Customer> createCustomer({
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+    required String city,
+    required String pincode,
+    required String gstNo,
+  }) async {
+    final token = await StorageService.getToken();
+    if (token == null) {
+      throw Exception('No token available');
+    }
+
+    const String apiUrl = 'https://api.polynovators.in/api/v1/customers/';
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'phone': phone,
+          'address': address,
+          'city': city,
+          'pincode': pincode,
+          'gst_no': gstNo,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        return Customer.fromJson(jsonDecode(response.body));
+      } else {
+        final errorData = jsonDecode(response.body);
+        throw Exception(errorData.toString());
       }
     } catch (e) {
       throw Exception('An error occurred: $e');
