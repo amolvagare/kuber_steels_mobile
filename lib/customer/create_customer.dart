@@ -40,7 +40,7 @@ class _CreateCustomerScreenState extends State<CreateCustomerScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await ApiService().createCustomer(
+      final customer = await ApiService().createCustomer(
         name: _nameController.text,
         email: _emailController.text,
         phone: _phoneController.text,
@@ -54,7 +54,7 @@ class _CreateCustomerScreenState extends State<CreateCustomerScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Customer created successfully')),
         );
-        Navigator.pop(context); // Return to customer list
+        Navigator.pop(context, customer); // Return the created customer
       }
     } catch (e) {
       if (mounted) {

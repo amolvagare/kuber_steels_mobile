@@ -39,21 +39,38 @@ class _CustomerSelectionScreenState extends State<CustomerSelectionScreen> {
     super.dispose();
   }
 
-  Future<List<Customer>> _loadCustomers({String? query}) async {
-    return ApiService().getCustomers(searchQuery: query);
+  Future<List<Customer>> _loadCustomers() {
+    return ApiService().getCustomers(
+      searchQuery: _searchController.text.isEmpty ? null : _searchController.text,
+    );
   }
 
   void _onSearchChanged() {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       setState(() {
-        _customersFuture = _loadCustomers(query: _searchController.text);
+        _customersFuture = _loadCustomers();
       });
     });
   }
 
   void _onFocusChange() {
     setState(() {});
+  }
+
+  void _refreshCustomers() {
+    setState(() {
+      _customersFuture = _loadCustomers();
+    });
+  }
+
+  void _navigateToCreateCustomer() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CreateCustomerScreen()),
+    );
+    
+    _refreshCustomers();
   }
 
   @override
@@ -203,14 +220,7 @@ class _CustomerSelectionScreenState extends State<CustomerSelectionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreateCustomerScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: _navigateToCreateCustomer,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
@@ -242,6 +252,11 @@ class _CustomerSelectionScreenState extends State<CustomerSelectionScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToCreateCustomer,
+        backgroundColor: AppColors.primaryColor,
+        child: const Icon(Icons.add),
       ),
     );
   }
