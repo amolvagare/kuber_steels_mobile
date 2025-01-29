@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class AuthenticationService {
   Future<void> signInWithEmailAndPassword(String email, String password) async {
-    const String apiUrl = 'http://localhost:8443/api/auth'; // Replace with your actual API endpoint
+    const String apiUrl = 'http://127.0.0.1:8000/api/auth'; // Replace with your actual API endpoint
 
     try {
       final response = await http.post(

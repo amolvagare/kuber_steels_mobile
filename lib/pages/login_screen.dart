@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (_formKey.currentState!.validate()) {
                                         print(_emailController.text.trim());
                                         print(_passwordController.text.trim());
-                                        new AuthenticationService()
+                                        AuthenticationService()
                                             .signInWithEmailAndPassword(
                                                 _emailController.text.trim(),
                                                 _passwordController.text

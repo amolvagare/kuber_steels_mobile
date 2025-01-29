@@ -5,10 +5,19 @@ import 'pages/splash_screen.dart';
 import 'pages/login_screen.dart';
 import 'pages/forgot_password_screen.dart';
 import 'pages/home_screen.dart'; // The Home Page after login
+import 'package:provider/provider.dart';
+import 'providers/cart_provider.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CartProvider(),
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

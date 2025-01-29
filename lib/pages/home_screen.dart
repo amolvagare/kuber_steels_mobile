@@ -4,6 +4,7 @@ import '../components/header.dart';
 import '../customer/customer_selection.dart';
 import 'contact_us.dart';
 import '../product/product_page.dart';
+import 'account_info_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Card(
-                color: Colors.grey[100], // Original light card color
+                color: Colors.grey[100],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -57,6 +58,8 @@ class HomeScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 20),
+
+                      // feature buttons 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -68,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProductPage(),
+                                  builder: (context) => const ProductPage(),
                                 ),
                               );
                             },
@@ -81,7 +84,8 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const ContactUsPage(), // Navigate to Contact Us page
+                                  builder: (context) =>
+                                      const ContactUsPage(), // Navigate to Contact Us page
                                 ),
                               );
                             },
@@ -94,7 +98,21 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const CustomerSelectionScreen(),
+                                  builder: (context) =>
+                                      const CustomerSelectionScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                          _buildFeatureButton(
+                            context,
+                            Icons.person,
+                            'Account',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AccountInfoScreen(),
                                 ),
                               );
                             },
@@ -128,7 +146,7 @@ class HomeScreen extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(color: Colors.black), // Original text color for consistency
+          style: const TextStyle(color: Colors.black),
         ),
       ],
     );
