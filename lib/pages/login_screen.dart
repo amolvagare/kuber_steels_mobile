@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:kuber_steels/services/authentication.dart';
 import '../components/button.dart';
 import '../components/input_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,51 +44,75 @@ class LoginScreen extends StatelessWidget {
                       const Text(
                         'Welcome to Kuber Steel Industries',
                         style: TextStyle(
-                          color: Colors.black, // Dark color for visibility on light background
+                          color: Colors.black,
+                          // Dark color for visibility on light background
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 40),
+                      Form(
+                          key: _formKey,
+                          child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  // Username Input Field
+                                  CustomInputField(
+                                    label: 'Username',
+                                    icon: Icons.person,
+                                    controller: _emailController,
+                                    isRequired: true,
+                                    errorMessage: "please enter username",
+                                  ),
+                                  const SizedBox(height: 16),
 
-                      // Username Input Field
-                      const CustomInputField(
-                        label: 'Username',
-                        icon: Icons.person,
-                      ),
-                      const SizedBox(height: 16),
+                                  // Password Input Field
+                                  CustomInputField(
+                                    label: 'Password',
+                                    icon: Icons.lock,
+                                    isPassword: true,
+                                    isRequired: true,
+                                    controller: _passwordController,
+                                    errorMessage: "please enter password",
+                                  ),
+                                  const SizedBox(height: 16),
 
-                      // Password Input Field
-                      const CustomInputField(
-                        label: 'Password',
-                        icon: Icons.lock,
-                        isPassword: true,
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Forgot Password Link
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/forgot-password');
-                          },
-                          child: const Text(
-                            'Forgot password?',
-                            style: TextStyle(color: Colors.blueAccent), // Accent color for visibility
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Login Button
-                      CustomButton(
-                        text: 'LOGIN',
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home'); // Navigate to HomeScreen
-                        },
-                      ),
+                                  // Forgot Password Link
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/forgot-password');
+                                      },
+                                      child: const Text(
+                                        'Forgot password?',
+                                        style: TextStyle(
+                                            color: Colors
+                                                .blueAccent), // Accent color for visibility
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  // Login Button
+                                  CustomButton(
+                                    text: 'LOGIN',
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        print(_emailController.text.trim());
+                                        print(_passwordController.text.trim());
+                                        AuthenticationService()
+                                            .signInWithEmailAndPassword(
+                                                _emailController.text.trim(),
+                                                _passwordController.text
+                                                    .trim());
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )))
                     ],
                   ),
                 ),

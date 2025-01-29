@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:kuber_steels/services/storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
 
@@ -28,9 +29,17 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.forward();
 
-    // Navigate to login screen after 3 seconds
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login');
+    // Check token and navigate accordingly after 3 seconds
+    Timer(const Duration(seconds: 3), () async {
+      if (!mounted) return;
+      final token = await StorageService.getToken();
+      if (token != null) {
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/login');
+      }
     });
   }
 

@@ -6,11 +6,14 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
   final bool showAccountIcon;
+  final List<Widget>? actions;
 
-  const Header({super.key, 
+  const Header({
+    super.key, 
     required this.title,
     this.showBackButton = false,
     this.showAccountIcon = true,
+    this.actions,
   });
 
   @override
@@ -37,8 +40,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 18,
         ),
       ),
-      actions: showAccountIcon
-          ? [
+      actions: actions ??
+          (showAccountIcon
+              ? [
         IconButton(
           icon: const Icon(Icons.account_circle, color: Colors.white),
           onPressed: () {
@@ -46,7 +50,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ]
-          : [],
+          : []),
     );
   }
 
@@ -108,9 +112,13 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   // Function to open account info screen
   void _showAccountInfoDialog(BuildContext context) {
-    showDialog(
+    showGeneralDialog(
       context: context,
-      builder: (BuildContext context) => const AccountInfoScreen(), // Opens AccountInfoScreen
+      barrierDismissible: true,
+      barrierLabel: '',
+      barrierColor: Colors.black54,
+      transitionDuration: Duration.zero,
+      pageBuilder: (context, _, __) => const AccountInfoScreen(),
     );
   }
 
