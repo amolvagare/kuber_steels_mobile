@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../components/header.dart';
 import '../models/product.dart';
 import '../services/api_service.dart';
+import '../providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class OrderGCScreen extends StatefulWidget {
   final Product product;
@@ -22,31 +25,26 @@ class _OrderGCScreenState extends State<OrderGCScreen> {
     _productDetailsFuture = ApiService().getProductDetails(widget.product.id);
   }
 
+  void _addToCart() {
+    if (selectedVariant != null) {
+      context.read<CartProvider>().addToCart(widget.product, selectedVariant!);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Product added to cart')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a variant')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: const Text(
-          'KUBER STEEL INDUSTRIES',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            // Open drawer or other actions
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.white),
-            onPressed: () {
-              // Navigate to cart page or other actions
-            },
-          ),
-        ],
+      appBar: const Header(
+        title: 'Order GC Sheet',
+        showBackButton: true,
       ),
-      backgroundColor: AppColors.backgroundColor,
       body: FutureBuilder<Product>(
         future: _productDetailsFuture,
         builder: (context, snapshot) {
@@ -68,7 +66,7 @@ class _OrderGCScreenState extends State<OrderGCScreen> {
               children: [
                 Text('Product: ${product.name}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
-                
+
                 // Color dropdown
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(labelText: 'Color'),
@@ -79,7 +77,9 @@ class _OrderGCScreenState extends State<OrderGCScreen> {
                           ))
                       .toList(),
                   onChanged: (value) {
-                    // Handle color selection
+                    setState(() {
+                      selectedVariant = variants.firstWhere((v) => v.color.colorName == value);
+                    });
                   },
                 ),
 
@@ -93,7 +93,9 @@ class _OrderGCScreenState extends State<OrderGCScreen> {
                           ))
                       .toList(),
                   onChanged: (value) {
-                    // Handle size selection
+                    setState(() {
+                      selectedVariant = variants.firstWhere((v) => v.size.sizeValue == value);
+                    });
                   },
                 ),
 
@@ -107,11 +109,20 @@ class _OrderGCScreenState extends State<OrderGCScreen> {
                           ))
                       .toList(),
                   onChanged: (value) {
-                    // Handle thickness selection
+                    setState(() {
+                      selectedVariant = variants.firstWhere((v) => v.thickness.thicknessValue == value);
+                    });
                   },
                 ),
 
-                // ... rest of your form fields
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _addToCart,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Add to Cart'),
+                ),
               ],
             ),
           );

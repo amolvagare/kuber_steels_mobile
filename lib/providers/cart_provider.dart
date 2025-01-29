@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../models/cart_item.dart';
+import '../models/product.dart';
 
 class CartProvider extends ChangeNotifier {
   final Map<String, List<CartItem>> _customerCarts = {};
@@ -45,4 +46,17 @@ class CartProvider extends ChangeNotifier {
     _currentCustomerId = null;
     notifyListeners();
   }
+
+  void addToCart(Product product, ProductVariant variant) {
+    if (_currentCustomerId == null) return;
+    _customerCarts[_currentCustomerId]?.add(CartItem(product: product, variant: variant));
+    notifyListeners();
+  }
+}
+
+class CartItem {
+  final Product product;
+  final ProductVariant variant;
+
+  CartItem({required this.product, required this.variant});
 } 

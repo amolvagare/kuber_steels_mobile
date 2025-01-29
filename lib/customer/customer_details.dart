@@ -38,6 +38,21 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
     super.dispose();
   }
 
+  void _navigateToEdit() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditCustomerScreen(customer: widget.customer),
+      ),
+    );
+    
+    if (result != null) {
+      setState(() {
+        _customer = result as Customer;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,19 +62,7 @@ class _CustomerDetailsScreenState extends State<CustomerDetailsScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () async {
-              final editedCustomer = await Navigator.push<Customer>(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditCustomerScreen(customer: _customer),
-                ),
-              );
-              if (editedCustomer != null) {
-                setState(() {
-                  _customer = editedCustomer;
-                });
-              }
-            },
+            onPressed: _navigateToEdit,
           ),
         ],
       ),

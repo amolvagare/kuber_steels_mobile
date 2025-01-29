@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/customer.dart';
+import '../theme/app_theme.dart';
 import '../components/header.dart';
+import '../models/customer.dart';
+import '../services/api_service.dart';
 
 class EditCustomerScreen extends StatefulWidget {
   final Customer customer;
@@ -12,13 +14,15 @@ class EditCustomerScreen extends StatefulWidget {
 }
 
 class _EditCustomerScreenState extends State<EditCustomerScreen> {
-  late TextEditingController _nameController;
-  late TextEditingController _emailController;
-  late TextEditingController _phoneController;
-  late TextEditingController _addressController;
-  late TextEditingController _cityController;
-  late TextEditingController _pincodeController;
-  late TextEditingController _gstController;
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _nameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _addressController;
+  late final TextEditingController _cityController;
+  late final TextEditingController _pincodeController;
+  late final TextEditingController _gstController;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -44,6 +48,42 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
     super.dispose();
   }
 
+  Future<void> _updateCustomer() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final updatedCustomer = await ApiService().updateCustomer(
+        url: widget.customer.url,
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        address: _addressController.text,
+        city: _cityController.text,
+        pincode: _pincodeController.text,
+        gstNo: _gstController.text,
+      );
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Customer updated successfully')),
+        );
+        Navigator.pop(context, updatedCustomer);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,33 +91,55 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
         title: 'Edit Customer',
         showBackButton: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: const EdgeInsets.all(16),
           children: [
-            _buildTextField('Name', _nameController, Icons.person),
-            _buildTextField('Email', _emailController, Icons.email),
-            _buildTextField('Phone', _phoneController, Icons.phone),
-            _buildTextField('Address', _addressController, Icons.location_on),
-            _buildTextField('City', _cityController, Icons.location_city),
-            _buildTextField('Pincode', _pincodeController, Icons.pin_drop),
-            _buildTextField('GST No.', _gstController, Icons.receipt),
+            _buildTextField(
+              controller: _nameController,
+              label: 'Name',
+              validator: (v) => v?.isEmpty ?? true ? 'Name is required' : null,
+            ),
+            _buildTextField(
+              controller: _emailController,
+              label: 'Email',
+              validator: (v) => v?.isEmpty ?? true ? 'Email is required' : null,
+            ),
+            _buildTextField(
+              controller: _phoneController,
+              label: 'Phone',
+              validator: (v) => v?.isEmpty ?? true ? 'Phone is required' : null,
+            ),
+            _buildTextField(
+              controller: _addressController,
+              label: 'Address',
+              validator: (v) => v?.isEmpty ?? true ? 'Address is required' : null,
+            ),
+            _buildTextField(
+              controller: _cityController,
+              label: 'City',
+              validator: (v) => v?.isEmpty ?? true ? 'City is required' : null,
+            ),
+            _buildTextField(
+              controller: _pincodeController,
+              label: 'Pincode',
+              validator: (v) => v?.isEmpty ?? true ? 'Pincode is required' : null,
+            ),
+            _buildTextField(
+              controller: _gstController,
+              label: 'GST No',
+              validator: (v) => v?.isEmpty ?? true ? 'GST No is required' : null,
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                final editedCustomer = Customer(
-                  url: widget.customer.url,
-                  name: _nameController.text,
-                  email: _emailController.text,
-                  phone: _phoneController.text,
-                  address: _addressController.text,
-                  city: _cityController.text,
-                  pincode: _pincodeController.text,
-                  gstNo: _gstController.text,
-                );
-                Navigator.pop(context, editedCustomer);
-              },
-              child: const Text('Save Changes'),
+              onPressed: _isLoading ? null : _updateCustomer,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+              child: _isLoading
+                  ? const CircularProgressIndicator()
+                  : const Text('Update Customer'),
             ),
           ],
         ),
@@ -85,18 +147,20 @@ class _EditCustomerScreenState extends State<EditCustomerScreen> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, IconData icon) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String? Function(String?) validator,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: Icon(icon),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          border: const OutlineInputBorder(),
         ),
+        validator: validator,
       ),
     );
   }

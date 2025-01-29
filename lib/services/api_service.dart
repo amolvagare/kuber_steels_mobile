@@ -169,4 +169,48 @@ class ApiService {
       throw Exception('An error occurred: $e');
     }
   }
+
+  Future<Customer> updateCustomer({
+    required String url,
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+    required String city,
+    required String pincode,
+    required String gstNo,
+  }) async {
+    final token = await StorageService.getToken();
+    if (token == null) {
+      throw Exception('No token available');
+    }
+
+    try {
+      final response = await http.put(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'phone': phone,
+          'address': address,
+          'city': city,
+          'pincode': pincode,
+          'gst_no': gstNo,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return Customer.fromJson(jsonDecode(response.body));
+      } else {
+        final errorData = jsonDecode(response.body);
+        throw Exception(errorData.toString());
+      }
+    } catch (e) {
+      throw Exception('An error occurred: $e');
+    }
+  }
 }
